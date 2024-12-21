@@ -1,6 +1,6 @@
 # Dasar Pemrograman Exercises
 
-This repository contains function for the subject "Dasar Pemrograman". This repository is intended for educational purposes and to help students understand the basic concepts of programming. Also for my own learning purposes to understand the basic concepts of programming and how to document a code.
+This repository contains function for the subject "Dasar Pemrograman". This repository is intended for educational purposes and to help students understand the basic concepts of programming.
 
 ## Overview
 
