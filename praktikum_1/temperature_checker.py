@@ -1,9 +1,14 @@
-def temperature_checker(temperature: int) :
-    if temperature > 99 : return "Uap"
-    elif temperature > 0 : return "Cair"
-    return "Es (Padat)"
+def temperature_checker(temperature: int) -> str :
+    """This function check the value of temperature fits in which category of temperature."""
+    if temperature > 99 : 
+        return "Steam"
+    elif temperature > 0 : 
+        return "Liquid"
+    else : 
+        return "Ice/Solid"
 
-# print(temperature_checker(150)) # Uap
-# print(temperature_checker(100)) # Uap
-# print(temperature_checker(10)) # Cair
-# print(temperature_checker(-10)) # Es (Padat)
+if __name__ == "__main__" : 
+    print(temperature_checker(150)) # Steam
+    print(temperature_checker(100)) # Steam
+    print(temperature_checker(10)) # Liquid
+    print(temperature_checker(-10)) # Ice/Solid

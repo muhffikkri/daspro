@@ -138,8 +138,8 @@ def Rember(e, S) :
 # print(Rember(3, [4, 3, [2,4], 3])) 
 # print(Rember(3, [2, 4, [3,6,9], 5, 3])) 
 
-# Max: list of list -> elemen
-# Max(S) mengembalikan elemen maksimum di dalam list of list S
+# max2: 2 real -> real
+# max2(x, y) mengembalikan angka terbesar dari x atau y
 def max2(x, y) : 
     return x if (x > y) else y
 
@@ -193,50 +193,23 @@ def SumLol(S) :
     else : 
         if IsAtom(FirstList(S)) :
             return FirstList(S) + SumLol(TailList(S))
-        elif IsList(FirstList(S)) : 
-            return SumLol(FirstElmt(S))
         else : 
-            return SumLol(TailList(S))
+            return SumLol(FirstList(S)) + SumLol(TailList(S))
 # Contoh aplikasi:
 # print(SumLol([[]]))
 # print(SumLol([4, 5, 6, [2,3,1]]))
 # print(SumLol([[2,3,4]]))
 
-# MaxElmtList: list of list -> integer
-# MaxElmtList(S) mengembalikan elemen list maksimum yang ada pada list of list
-def MaxElmtList(S) :
-    if IsEmpty(S) :
-        return 0
-    else : 
-        if IsAtom(FirstList(S)) : 
-            return max2(FirstElmt(S), MaxElmtList(TailList(S)))
-        else : 
-            return max2(MaxElmtList(FirstList(S)), MaxElmtList(TailList(S)))
-# Contoh aplikasi:
-# print(MaxElmtList([1,2,3,[1,2,3],5,[7]]))
-# print(MaxElmtList([1,2,9,[7]]))
-
-# CountElmtListE: element, list of list -> integer
-# CountElmtListE(e, S) mengembalikan banyaknya elemen e pada sebuah list of list
-def CountElmtListE(e, S) : 
-    if IsEmpty(S) : 
-        return 0
-    else : 
-        if IsAtom(FirstList(S)) : 
-            if FirstList(S) == e : 
-                return 1 + CountElmtListE(e, TailList(S)) 
-            else : 
-                return CountElmtListE(e, TailList(S))
-        else : 
-            return CountElmtListE(e, FirstList(S)) + CountElmtListE(e, TailList(S))
-# Contoh aplikasi:
-# print(CountElmtListE(7, [1,2,3,[1,2,3],7,7,[7],5,[7]]))
-# print(CountElmtListE(9, [1,2,9,[7],9,9]))
-
 # MaxNBElmtList: list of list -> integer
 # MaxNBElmtList(S) mengembalikan banyaknya elemen list maksimum yang ada pada list of list S
 def MaxNBElmtList(S) :
-    return CountElmtListE(MaxElmtList(S), S)
+    if IsEmpty(S) : 
+        return 0
+    else : 
+        if IsList(FirstList(S)) : 
+            return max2(NBElmtAtom(FirstList(S)), MaxNBElmtList(TailList(S)))
+        else : 
+            return MaxNBElmtList(TailList(S))   
 # Contoh aplikasi:
 # print(MaxNBElmtList([[4,5,6,7], [12], 12, [8,9,10], [12,0], 8]))
 # print(MaxNBElmtList([[4,15], 6, [8,9], 10, [12], 8]))
@@ -254,6 +227,14 @@ def MaxSumElmt(S) :
             return max2(FirstList(S), MaxSumElmt(TailList(S)))
         else : 
             return max2(SumElmt(FirstList(S)), MaxSumElmt(TailList(S)))
+
+
+def max2(a, b) :
+    if a > b :
+        return a
+    else :
+        return b
+    
 # Contoh aplikasi:
 # print(MaxSumElmt([[1,2], 9, [4,5,6], 8]))
 # print(MaxSumElmt([[1,2], 90, [4,5,6], 8]))

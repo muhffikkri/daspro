@@ -46,12 +46,12 @@ def MakeSet(L) :
         return []
     else : 
         if isMember(FirstElmt(L), Tail(L)) : 
-            return Konso(FirstElmt(L), MakeSet(MultiRember(FirstElmt(L), Tail(L))))
-            # MakeSet(MultiRember(FirstElmt(L), Tail(L)))
+            # return Konso(FirstElmt(L), MakeSet(MultiRember(FirstElmt(L), Tail(L))))
+            return MakeSet(MultiRember(FirstElmt(L), Tail(L)))
         else : 
             return Konso(FirstElmt(L), MakeSet(Tail(L)))
 
-# print(MakeSet([1,2,3,4,5,2,2]))
+print(MakeSet([1,2,3,4,5,2,2]))
 
 #DEFINISI DAN SPESIKASI KONSTRUKTOR SET
 # KonsoSet: elemen,set -> set
@@ -107,8 +107,8 @@ def IsEqualSet(H1, H2) :
     else :
         return IsSubset(H1, H2) and IsSubset(H2, H1)
 
-# print(IsEqualSet([1,2,3], [1,2,3]))
-# print(IsEqualSet([1,2,3], [1,2,4]))
+print(IsEqualSet([1,2,3], [1,2,3]))
+print(IsEqualSet([1,2,3], [1,2,4]))
 
 # IsIntersect: 2 set -> boolean
 # IsIntersect(H1,H2) benar jika H1 beririsan dengan H2
@@ -137,6 +137,8 @@ def MakeIntersect(H1, H2) :
         else : 
             return MakeIntersect(Tail(H1), H2)
 
+print(MakeIntersect([1,2,3], [3,4,5]))
+
 # MakeUnion: 2 set -> set
 # MakeUnion(H1,H2) menghasilkan set baru yang merupakan hasil gabungan antara H1 dan H2
 def MakeUnion(H1, H2) : 
@@ -152,7 +154,7 @@ def MakeUnion(H1, H2) :
         else : 
             return Konso(FirstElmt(H1), MakeUnion(Tail(H1), H2))
 
-# print(MakeUnion([1,2,3], [4,5,6]))
+print(MakeUnion([1,2,3], [4,5,6]))
 
 # NBIntersect: 2 set -> integer
 # NBIntersect(H1,H2) menghasilkan jumlah elemen yang beririsan pada H1 dan H2
@@ -166,16 +168,18 @@ def NbIntersect(H1, H2) :
         else : 
             return NbIntersect(Tail(H1), H2)
 
-# print(NbIntersect([1,2,3], [3,4,5]))
-# print(NbIntersect([1,2,3], [3,2,5]))
+print(NbIntersect([1,2,3], [3,4,5]))
+print(NbIntersect([1,2,3], [3,2,5]))
 
 # NBUnion: 2 set -> integer
 # NBUnion(H1,H2) menghasilkan jumlah elemen hasil gabungan antara H1 dan H2
 # tanpa memanfaatkan fungsi MakeUnion(H1,H2).
 def NbUnion(H1, H2) : 
-    if not IsEmpty(H1) and IsEmpty(H2) : 
-        return 0
-    elif IsEmpty(H1) and not IsEmpty(H2) : 
+    # if not IsEmpty(H1) and IsEmpty(H2) : 
+    #     return 0
+    # elif IsEmpty(H1) and not IsEmpty(H2) : 
+    #     return 0
+    if IsEmpty(H1) or IsEmpty(H2) :
         return 0
     else : 
         if isMember(FirstElmt(H1), H2) :
@@ -183,5 +187,5 @@ def NbUnion(H1, H2) :
         else : 
             return 2 + NbUnion(Tail(H1), H2)
         
-# print(NbUnion([1,2,3], [3,2,5]))
-# print(NbUnion([1,2,3], [3,4,5]))
+print(NbUnion([1,2,3], [3,2,5]))
+print(NbUnion([1,2,3], [3,4,5]))

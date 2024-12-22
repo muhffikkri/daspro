@@ -1,55 +1,114 @@
-# Tugas Daspro Kelas
+def show_day(days: int) -> str:
+    """
+    Return the day of the week given the number of days since 1 January 1900. 1 January 1900 is a Saturday.
 
-# 1 januari sabtu
-# Apakah lusa adalah kamis
-# print(7 % 7) 0 sabtu
-# print(1 % 7) 1 minggu
-# print(2 % 7) 2 senin
-# print(3 % 7) 3 selasa 
-# print(4 % 7) 4 rabu
-# print(5 % 7) 5 kamis
-# print(6 % 7) 6 jumat
+    :param days: The number of days since 1 January 1900.
+    :type days: int
+    :return: The day of the week.
+    :rtype: str
 
-def day_per_month(month: int) :
-    if month == 1 : return 1
-    elif month == 2 : return 32
-    elif month == 3 : return 60 
-    elif month == 4 : return 91
-    elif month == 5 : return 121
-    elif month == 6 : return 152
-    elif month == 7 : return 181
-    elif month == 8 : return 213
-    elif month == 9 : return 244
-    elif month == 10 : return 274
-    elif month == 11 : return 305
-    elif month == 12 : return 335
+    :example:
+    >>> show_day(0)
+    'Saturday'
+    >>> show_day(1)
+    'Sunday'
+    """
+    match days % 7:
+        case 0: return "Saturday"
+        case 1: return "Sunday"
+        case 2: return "Monday"
+        case 3: return "Tuesday"
+        case 4: return "Wednesday"
+        case 5: return "Thursday"
+        case 6: return "Friday"
 
-def sum_of_days(day: int, month: int, year: int) :
-    return day_per_month(month) + day - 1 + (1 if month > 2 and ((year % 4 == 0 and year % 100 != 0) or year % 400 == 0) else 0)
+def is_leap_year(year: int) -> bool:
+    """
+    Return True if the year is a leap year, False otherwise.
 
-# list_of_day = ["Sabtu", "Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat"]
+    :param year: The year to check.
+    :type year: int
+    :return: True if the year is a leap year, False otherwise.
+    :rtype: bool
 
-def show_day(days: int) : 
-    order_of_day = (days % 7) - 1
-    if order_of_day == 0 : return "Sabtu"
-    elif order_of_day == 1 : return "Minggu"
-    elif order_of_day == 2 : return "Senin"
-    elif order_of_day == 3 : return "Selasa"
-    elif order_of_day == 4 : return "Rabu"
-    elif order_of_day == 5 : return "Kamis"
-    elif order_of_day == 6 : return "Jumat"
-    # return list_of_day[(days % 7) - 1]
+    :example:
+    >>> is_leap_year(2020)
+    True
+    >>> is_leap_year(2021)
+    False
+    """
+    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
 
-# def is_the_day_after_tomorrow_thursday(days: int) :
-    # return [show_day(days + 2) == "Kamis", show_day(days - 7)]
-    # return show_day(days + 2) == "Kamis"
+def day_per_month(month: int) -> int:
+    """
+    Return the number of days in the given month.
 
-def is_the_day_after_tomorrow_thursday(day: int, month: int, year: int) :
-    return show_day(sum_of_days(day + 2, month, year)) == "Kamis"
+    This function returns the number of days from day one to day one in the given month. Except for January, the function will return the cumulative number of days
+    : Formula : 1 + number of days in the given month 
+    : January : 1 + 0 = 1
+    : February : 1 + 28 = 32
+    : March : 1 + 28 + 31 = 60
+    : April : 1 + 31 + 28 + 31 = 91
+    : May : 1 + 31 + 28 + 31 + 30 = 121
+    : June : 1 + 31 + 28 + 31 + 30 + 31 = 152
+    : July : 1 + 31 + 28 + 31 + 30 + 31 + 30 = 181
+    : August : 1 + 31 + 28 + 31 + 30 + 31 + 30 + 31 = 213
+    : September : 1 + 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 = 244
+    : October : 1 + 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 = 274
+    : November : 1 + 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31 = 305
+    : December : 1 + 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31 + 30 = 335
+ 
+    : Example : 
+    >>> day_per_month(1)
+    1
+    >>> day_per_month(2)
+    32
+    """
 
-# print(show_day(sum_of_days(30,8,2000))) # Rabu
-# print(is_the_day_after_tomorrow_thursday(30,8,2000)) # False
-# print(show_day(sum_of_days(25,6,2004))) # Minggu
-# print(is_the_day_after_tomorrow_thursday(25,6,2004)) # False
-# print(show_day(sum_of_days(11,4,2020))) # Selasa
-# print(is_the_day_after_tomorrow_thursday(4,1,2020)) # True
+    match month : 
+        case 1 : return 1
+        case 2 : return 32
+        case 3 : return 60 
+        case 4 : return 91
+        case 5 : return 121
+        case 6 : return 152
+        case 7 : return 181
+        case 8 : return 213
+        case 9 : return 244
+        case 10 : return 274
+        case 11 : return 305
+        case 12 : return 335
+
+def sum_of_days(day: int, month: int, year: int) -> int :
+    """
+    Return the sum of days from day one to specific day in the given month and year. 
+    If year is a leap year , February will have 29 days. Otherwise, February will have 28 days.
+    : Formula : 1 + (day - 1) + sum of days from day one to day one in the given month
+
+    : EXAMPLE : 
+    >>> sum_of_days(10, 2, 2024)
+    42
+    """
+
+    if month > 2 and is_leap_year(year) :
+        return day_per_month(month) + day - 1
+    else : 
+        return day_per_month(month) + day - 1 + 1 
+
+
+def is_the_day_after_tomorrow_thursday(day: int, month: int, year: int) -> bool :
+    """Return true if the day after tomorrow is Thursday, false otherwise"""
+    return sum_of_days(day + 2, month, year) % 7 == 5
+
+if __name__ == "__main__" :
+    print(sum_of_days(10, 2, 2024)) # Output: 42
+    print(is_the_day_after_tomorrow_thursday(10, 2, 2024)) # Output: False
+    print(show_day(sum_of_days(10, 2, 2024))) # Output: Saturday
+
+    print(sum_of_days(30, 8, 2000)) # Output: 242
+    print(is_the_day_after_tomorrow_thursday(30, 8, 2000)) # Output: False
+    print(show_day(sum_of_days(30,8, 2000))) # Output: Wednesday
+    
+    print(sum_of_days(25, 6, 2024)) # Output: 176
+    print(show_day(sum_of_days(25,6,2004))) # Output: Sunday
+    print(is_the_day_after_tomorrow_thursday(25,6,2004)) # Output: False

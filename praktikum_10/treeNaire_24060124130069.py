@@ -44,25 +44,30 @@ def isOneElmt(PN) :
 def NbElmt(PN) : 
     # Basis : jika pohon kosong
     if isTreeNEmpty(PN) : 
+        print("PN : ", PN)
         return 0
     
     # jika hanya ada satu elemen (akar saja)
     else :
         if isOneElmt(PN) : 
+            print("PN : ", PN)
             return 1
             
         # Hitung 1 untuk akar, dan rekursif pada setiap anak pohon
         # Tanpa menggunakan loop, kita memanggil fungsi untuk setiap secara rekursif
         # Pertama pada anak pertama
         else : 
+            print("PN : ", PN)
             return 1 + NbElmt(FirstElmt(anak(PN))) + NbElmtChild(Tail(anak(PN)))
 
 # Fungsi tambahan untuk menghitung jumlah elemen pada sisa anak-anak
 # NbElmtChild : PohonN-ner -> integer
 def NbElmtChild(PN) : 
     if isTreeNEmpty(PN) : 
+        print("PN : ", PN)
         return 0
     else : 
+        print("PN : ", PN)
         return NbElmt(FirstElmt(PN)) + NbElmtChild(Tail(PN))
 
 # NbNDaun : PohonN-ner -> integer >= 0
@@ -71,20 +76,25 @@ def NbElmtChild(PN) :
 # Rekurens : NbDaun((A, PN)) = NbNDaun(PN)
 def NbNDaun(PN) : 
     if isTreeNEmpty(PN) : 
+        print("PN : ", PN)
         return 0
     
     else :  
         if isOneElmt(PN) : 
+            print("PN : ", PN)
             return 1
         else : 
+            print("PN : ", PN)
             return NbNDaunChild(anak(PN))
 
 # Fungsi tambahan untuk menghitung jumlah daun pada sisa anak-anak 
 # NbNDaunChild : PohonN-ner -> integer >= 0
 def NbNDaunChild(PN) : 
     if isTreeNEmpty(PN) :
+        print("PN : ", PN)
         return 0
     else :         
+        print("PN : ", PN)
         return NbNDaun(FirstElmt(PN)) + NbNDaunChild(Tail(PN))
 
 # searchXTree : elemen, PohonN-ner -> boolean
@@ -107,111 +117,118 @@ def searchXTreeChild(x, PN) :
     else : 
         return searchXTree(x, akar(PN)) or searchXTreeChild(x, Tail(PN))
 
-# Fungsi untuk mengecek apakah x adalah sibling dari y
-# Sibling adalah node yang memiliki parent yang sama
-# isXSiblingY : elemen, elemen, PohonN-ner -> boolean
-# Contoh : 
-# S = makePN("A", [
-#         makePN("B", 
-#                 [
-#                     makePN("D", [
-#                         makePN("J", [])
-#                     ]),
-#                     makePN("E", [
-#                         makePN("I", [])
-#                     ])
-#                 ]
-#                ),
-#         makePN("C", [
-#                     makePN("F", []),
-#                     makePN("G", [
-#                         makePN("H", [])
-#                     ])
-#         ])
-# ])
-# [F, G] sibling
-# [D, E] sibling
-# [J, I] bukan sibling
-# [I, H] bukan sibling
-# isXSiblingY("F", "G", S) -> true
-# isXSiblingY("D", "E", S) -> true
-# isXSiblingY("J", "I", S) -> false
-# isXSiblingY("I", "H", S) -> false
-# def isXSiblingY(x, y, PN, parent = None) :
-#     if isTreeNEmpty(PN) : 
-#         return False
-    
-#     else :
-#         return isXSiblingYChild(x, y, anak(PN), Tail(PN))
-
-# # Fungsi tambahan untuk mengecek kecocokan x dan y di level berikutnya
-# # ixXSiblingY : elemen, elemen, PohonN-ner -> boolean
-# def isXSiblingYChild(x, y, PN, parent = None) : 
-#     if isTreeNEmpty(PN) :
-#         return False
-#     else : 
-#         return isXSiblingY(x, y, akar(PN), parent) or isXSiblingYChild(x, y, Tail(PN), parent)
-
-# def isXSiblingY(x, y, PN):
-#     if isTreeNEmpty(PN):
-#         return False
-    
-#     children = anak(PN)
-    
-#     # Check if x and y are in the same list of children
-#     if (akar(FirstElmt(children)) == x and searchXTree(y, children)) or (akar(FirstElmt(children)) == y and searchXTree(x, children)):
-#         return True
-    
-#     # Recursively check in the children
-#     return isXSiblingY(x, y, FirstElmt(children)) or isXSiblingY(x, y, Tail(children))
-
-# # Helper function to get the first element of a list
-# def FirstElmt(PN):
-#     return PN[0] if PN else None
-
-# ['A', 
-#     [
-#         ['B', 
-#             [
-#                 ['D', []], 
-#                 ['E', []]
-#             ]
-#         ], 
-#         ['C', 
-#             [
-#                 ['F', [
-#                     ['G', []]
-#                     ]
-#                 ]
-#             ]
-#         ]
-#     ]
-# ]
-
 T = makePN("A", 
         [
         makePN("B", 
             [
-                makePN("D", []), 
+                makePN("Z", []), 
+                makePN("Y", []), 
+                makePN("X", []), 
                 makePN("E", [])
+            ]),
+        makePN("F", 
+            [
+                makePN("G", []), 
+                makePN("H", []), 
+                makePN("I", []), 
+                makePN("J", [])
             ]),
         makePN("C",
             [
-                makePN("F", 
-                    [
-                        makePN("G", []),
-                    ])
+                makePN("F", [])
             ])
         ]
     )
 
+def isXIsSiblingofY(x, y, PN) : 
+    if isTreeNEmpty(PN):
+        return False
+    else :
+        if x == akar(PN) and y == akar(PN):
+            return False
+        elif x == akar(PN):
+            return True
+        else :
+            return isXIsSiblingofY(x, y, anak(PN)) or isXIsSiblingofY(x, y, anak(PN))
+        # return isXIsSiblingofY(x, y, Tail(PN))
+# print(isXIsSiblingofY("B", "C", T)) # True
+
 print(T)
-# print(isXSiblingY("F", "G", T)) # False
-# print(isXSiblingY("F", "E", T)) # False
-# print(isXSiblingY("D", "E", T)) # True
 print(NbElmt(T))
-print(NbNDaun(T))
-print(searchXTree("G", T))
-print(searchXTree("Z", T))
-print(searchXTree("F", T))
-print(FirstElmt(anak(T)))
+# print(NbNDaun(T))
+# print(searchXTree("G", T))
+# print(searchXTree("Z", T))
+# print(searchXTree("F", T))
+
+# def SubTX(x, PN) : 
+#     if isTreeNEmpty(PN) : 
+#         return []
+#     else : 
+#         if FirstElmt(PN) == x :
+#             return makePN(FirstElmt(PN), anak(PN))
+#         else :
+#             return SubTXChild(x, anak(PN))
+
+# def SubTXChild(x, PN) : 
+#     if isTreeNEmpty(PN) :
+#         return []
+#     else : 
+#         return SubTXChildChild(x, FirstElmt(PN), PN) 
+
+# def SubTXChildChild(x, PN, child) :
+#     if isTreeNEmpty(PN) :
+#         return []
+#     else : 
+#         return SubTX(x, PN, child) + SubTXChildChild(x, anak(PN), child)
+"""
+T = makePN("A", 
+        [
+        makePN("B", 
+            [
+                makePN("Z", []), 
+                makePN("Y", []), 
+                makePN("X", []), 
+                makePN("E", [])
+            ]),
+        makePN("F", 
+            [
+                makePN("G", []), 
+                makePN("H", []), 
+                makePN("I", []), 
+                makePN("J", [])
+            ]),
+        makePN("C",
+            [
+                makePN("F", [])
+            ])
+        ]
+    )
+"""
+
+def SubTX(x, PN) : 
+    if isTreeNEmpty(PN) : 
+        return []
+    else : 
+        if x == akar(PN) :
+            return PN
+        else :
+            return SubTXChild(x, anak(PN))
+
+def SubTXChild(x, PN) : 
+    if isTreeNEmpty(PN) :
+        return []
+    else : 
+        if not isTreeNEmpty(SubTX(x, FirstElmt(PN))):
+            return SubTX(x, FirstElmt(PN))
+        else:
+            return SubTXChild(x, Tail(PN))
+    
+    
+print(SubTX("Z", T))
+
+def main() : 
+    print("Tes")
+
+if __name__ == "__main__" : 
+    main()
+    

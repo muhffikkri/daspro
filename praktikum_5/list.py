@@ -62,18 +62,6 @@ def IsOneElmt(L) :
         return False
     else : 
         return Tail(L) == [] and Head(L) == []
-    
-# DEFINISI DAN SPESIFIKASI PREDIKAT RELASIONAL
-# IsEqual : 2 List -> boolean 
-# {IsEqual(L1,L2) benar jika semua elemen list L1 sama dengan L2: sama urutan dan sama nilainya}
-def IsEqual(L1,L2):
-    if(IsEmpty(L1) and IsEmpty(L2)):
-        return True
-    else:
-        if(FirstElmt(L1) == FirstElmt(L2)):
-            return IsEqual(Tail(L1),Tail(L2))
-        else:
-            return False
 
 # DEFINISI DAN SPESIFIKASI FUNGSI YANG MENGOPERASIKAN LIST
 # NbElmt : List -> integer
@@ -213,3 +201,17 @@ def IsPalindrom(L) :
         if FirstElmt(L) == FirstElmt(Inverse(L)) : 
             return IsPalindrom(Head(Tail(L)))
 
+# Return Himpunan A - Himpunan B
+def minus(A, B) :
+    if IsEmpty(A) : 
+        return []
+    else : 
+        if isMember(FirstElmt(A), B) : 
+            return minus(Tail(A), B)
+        else : 
+            return Konso(FirstElmt(A), minus(Tail(A), B))
+
+a = [5, 12, 16, 7, 19, 25, 30]
+b = [12, 7, 25]
+
+print(minus(a, b))

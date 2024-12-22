@@ -134,18 +134,18 @@ def NbDaun1(T) :
 
 
 
-T = MakePB('A', 
-            MakePB('B', 
-                MakePB('C', [], []), 
-                MakePB('D', 
-                       MakePB('E', [], []), 
-                       MakePB('F', [], [])
-                       )
-                ),  
-            MakePB('G', 
-                   MakePB('H', [], []), 
-                   []) 
-            )
+# T = MakePB('A', 
+#             MakePB('B', 
+#                 MakePB('C', [], []), 
+#                 MakePB('D', 
+#                        MakePB('E', [], []), 
+#                        MakePB('F', [], [])
+#                        )
+#                 ),  
+#             MakePB('G', 
+#                    MakePB('H', [], []), 
+#                    []) 
+#             )
 # PrintBinaryTree(T)
 # print(T)
 # print("Jumlah daun di dalam Tree pake NB1: ", NbDaun1(T))
@@ -269,7 +269,8 @@ def MakeListDaunTree(T):
             return []    
         else:
             if IsBiner(T):
-                return KonsLo(MakeListDaunTree(Right(T)), []) + KonsLo(MakeListDaunTree(Left(T)), [])
+                # return KonsLo(MakeListDaunTree(Right(T)), []) + KonsLo(MakeListDaunTree(Left(T)), [])
+                return KonsLo(MakeListDaunTree(Right(T)), MakeListDaun(Left(T)))
             else : 
                 if IsUnerLeft(T):
                     return KonsLo(MakeListDaunTree(Left(T)), [])
@@ -288,9 +289,34 @@ def MakeListDaunHelper(T) :
             else :
                 return MakeListDaunHelper(Tail(T))
 
-PrintBinaryTree(T)
+T = MakePB(10, 
+            MakePB(7, 
+                MakePB(2, [], []), 
+                MakePB(9, [], [])
+                ),  
+            MakePB(14, 
+                   MakePB(12, [], []), 
+                   MakePB(16, [], [])
+                   ) 
+            )
+
+IsEven = lambda n : n % 2 == 0
+
+def SearchMaxOdd(T) : 
+    if IsEmpty(T) : 
+        return 0
+    else : 
+        if IsEven(Akar(T)) :
+            return max2(0, max2(SearchMaxOdd(Left(T)), SearchMaxOdd(Right(T))))
+        else : 
+            return max2(Akar(T), max2(SearchMaxOdd(Left(T)), SearchMaxOdd(Right(T))))
+
+# print(SearchMaxOdd(T))
+
+# PrintBinaryTree(T)
 # PrintBinaryTree(DelDaun(T, "E"))
 # print(BSearch(T, "C"))
 # print(LevelOfX(T, "E"))
 # PrintBinaryTree(AddDaun(T, "E", "Z", True))
 # print(MakeListDaun(T))
+# print(MakeListDaunTree(T))
