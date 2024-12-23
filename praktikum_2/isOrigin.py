@@ -27,3 +27,8 @@ False
 def is_origin(x: float,y: float) -> bool: 
     """Return true when x=0 and y=0"""
     return x == 0 and y == 0
+
+if __name__ == "__main__" : 
+    print(is_origin(3,4)) # Output: False
+    print(is_origin(1,9)) # Output: False
+    print(is_origin(0,0)) # Output: True

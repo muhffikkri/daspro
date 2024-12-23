@@ -62,6 +62,18 @@ def IsOneElmt(L) :
         return False
     else : 
         return Tail(L) == [] and Head(L) == []
+    
+# DEFINISI DAN SPESIFIKASI PREDIKAT RELASIONAL
+# IsEqual : 2 List -> boolean 
+# {IsEqual(L1,L2) benar jika semua elemen list L1 sama dengan L2: sama urutan dan sama nilainya}
+def IsEqual(L1, L2):
+    if(IsEmpty(L1) and IsEmpty(L2)):
+        return True
+    else:
+        if(FirstElmt(L1) == FirstElmt(L2)):
+            return IsEqual(Tail(L1), Tail(L2))
+        else:
+            return False
 
 # DEFINISI DAN SPESIFIKASI FUNGSI YANG MENGOPERASIKAN LIST
 # NbElmt : List -> integer

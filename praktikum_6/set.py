@@ -3,7 +3,7 @@
 # Pembuat   : Muhammad Fikri-24060124130069
 # Tanggal   : 5 November 2024
 
-from praktikum_5.list import *
+from list import *
 
 #DEFINISI DAN SPESIFIKASI OPERASI LIST YANG DIPERLUKAN UNTUK HIMPUNAN
 # Rember: elemen, list -> list
