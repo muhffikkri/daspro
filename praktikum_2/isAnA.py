@@ -1,5 +1,5 @@
 """
-Maxwell, dengan keunikannya yang aneh namun menawan, memiliki kegemaran yang sangat spesifik terhadap huruf 'a'. Tak ada karakter lain yang mampu menarik perhatiannya seperti 'a'—tidak 'y', apalagi simbol aneh seperti '@'. Karena itu, dia menantangmu untuk membuat sebuah fungsi yang bisa membedakan antara 'a' dan semua karakter lainnya. Tanpa ragu, kamu menciptakan fungsi is_an_a(c), yang bertugas memastikan apakah karakter yang diberikan adalah sang primadona, yaitu 'a'. Jika karakter tersebut adalah 'a', maka Maxwell akan bersorak gembira; namun, jika bukan, Maxwell akan tahu bahwa itu bukanlah favoritnya!
+Maxwell, with his peculiar yet charming uniqueness, has a very specific fondness for the letter 'a'. No other character can capture his attention like 'a'—not 'y', and certainly not strange symbols like '@'. Therefore, he challenges you to create a function that can distinguish between 'a' and all other characters. Without hesitation, you create the function is_an_a(c), which ensures whether the given character is the star, 'a'. If the character is 'a', Maxwell will cheer with joy; however, if it is not, Maxwell will know that it is not his favorite!
 
 Input Format
 is_an_a(c)
@@ -21,12 +21,29 @@ Sample Output 1
 False
 """
 
-def is_an_a(c: str) -> bool : 
-    """Return true if c is a"""
-    return c == "a"
+def isAnA(c: str) -> bool:
+    """
+    Determine if the given character is 'a'.
 
-if __name__ == "__main__" : 
-    print(is_an_a("c")) # Output: False
-    print(is_an_a("g")) # Output: False
-    print(is_an_a("d")) # Output: False
-    print(is_an_a("a")) # Output: True
+    :param c: A single character to be checked.
+    :type c: str
+    :return: True if the character is 'a', False otherwise.
+    :rtype: bool
+
+    :example:
+    >>> isAnA('a')
+    True
+    >>> isAnA('b')
+    False
+
+    :raises TypeError: If c is not a string or if its length is not 1.
+    """
+    if not isinstance(c, str) or len(c) != 1:
+        raise TypeError("c must be a single character string")
+    return c == 'a'
+
+if __name__ == "__main__":
+    print(isAnA("c")) # Output: False
+    print(isAnA("g")) # Output: False
+    print(isAnA("d")) # Output: False
+    print(isAnA("a")) # Output: True

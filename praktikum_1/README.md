@@ -1,5 +1,7 @@
 ## Praktikum 1
 
+###
+
 ### `division_between_2_square_roots.py`
 
 - **square(x: int) -> int**
