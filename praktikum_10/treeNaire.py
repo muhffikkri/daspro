@@ -117,94 +117,6 @@ def searchXTreeChild(x, PN) :
     else : 
         return searchXTree(x, akar(PN)) or searchXTreeChild(x, Tail(PN))
 
-T = makePN("A", 
-        [
-        makePN("B", 
-            [
-                makePN("Z", []), 
-                makePN("Y", []), 
-                makePN("X", []), 
-                makePN("E", [])
-            ]),
-        makePN("F", 
-            [
-                makePN("G", []), 
-                makePN("H", []), 
-                makePN("I", []), 
-                makePN("J", [])
-            ]),
-        makePN("C",
-            [
-                makePN("F", [])
-            ])
-        ]
-    )
-
-def isXIsSiblingofY(x, y, PN) : 
-    if isTreeNEmpty(PN):
-        return False
-    else :
-        if x == akar(PN) and y == akar(PN):
-            return False
-        elif x == akar(PN):
-            return True
-        else :
-            return isXIsSiblingofY(x, y, anak(PN)) or isXIsSiblingofY(x, y, anak(PN))
-        # return isXIsSiblingofY(x, y, Tail(PN))
-# print(isXIsSiblingofY("B", "C", T)) # True
-
-print(T)
-print(NbElmt(T))
-# print(NbNDaun(T))
-# print(searchXTree("G", T))
-# print(searchXTree("Z", T))
-# print(searchXTree("F", T))
-
-# def SubTX(x, PN) : 
-#     if isTreeNEmpty(PN) : 
-#         return []
-#     else : 
-#         if FirstElmt(PN) == x :
-#             return makePN(FirstElmt(PN), anak(PN))
-#         else :
-#             return SubTXChild(x, anak(PN))
-
-# def SubTXChild(x, PN) : 
-#     if isTreeNEmpty(PN) :
-#         return []
-#     else : 
-#         return SubTXChildChild(x, FirstElmt(PN), PN) 
-
-# def SubTXChildChild(x, PN, child) :
-#     if isTreeNEmpty(PN) :
-#         return []
-#     else : 
-#         return SubTX(x, PN, child) + SubTXChildChild(x, anak(PN), child)
-"""
-T = makePN("A", 
-        [
-        makePN("B", 
-            [
-                makePN("Z", []), 
-                makePN("Y", []), 
-                makePN("X", []), 
-                makePN("E", [])
-            ]),
-        makePN("F", 
-            [
-                makePN("G", []), 
-                makePN("H", []), 
-                makePN("I", []), 
-                makePN("J", [])
-            ]),
-        makePN("C",
-            [
-                makePN("F", [])
-            ])
-        ]
-    )
-"""
-
 def SubTX(x, PN) : 
     if isTreeNEmpty(PN) : 
         return []
@@ -223,12 +135,33 @@ def SubTXChild(x, PN) :
         else:
             return SubTXChild(x, Tail(PN))
     
-    
-print(SubTX("Z", T))
-
-def main() : 
-    print("Tes")
-
 if __name__ == "__main__" : 
-    main()
+    T = makePN("A", 
+        [
+        makePN("B", 
+            [
+                makePN("Z", []), 
+                makePN("Y", []), 
+                makePN("X", []), 
+                makePN("E", [])
+            ]),
+        makePN("F", 
+            [
+                makePN("G", []), 
+                makePN("H", []), 
+                makePN("I", []), 
+                makePN("J", [])
+            ]),
+        makePN("C",
+            [
+                makePN("F", [])
+            ])
+        ]
+    )
+
+    print(NbNDaun(T))
+    print(searchXTree("G", T))
+    print(searchXTree("Z", T))
+    print(searchXTree("F", T))
+    print(SubTX("Z", T))
     

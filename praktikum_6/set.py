@@ -20,8 +20,6 @@ def Rember(x,L) :
         else :
             return Konso(FirstElmt(L), Rember(x, Tail(L)))
 
-# print(Rember(2, [1,2,3,4,5]))
-
 # MultiRember: elemen, list -> list
 # MultiRember(x,L) menghapus semua kemunculan elemen x dari list L.
 # List baru yang dihasilkan tidak lagi memiliki elemen x.
@@ -34,8 +32,6 @@ def MultiRember(x, L) :
             return MultiRember(x, Tail(L))
         else :
             return Konso(FirstElmt(L), MultiRember(x, Tail(L)))
-
-# print(MultiRember(2, [1,2,3,4,5,2,2]))
 
 #DEFINISI DAN SPESIKASI KONSTRUKTOR SET DARI LIST
 # MakeSet: list -> set
@@ -51,8 +47,6 @@ def MakeSet(L) :
         else : 
             return Konso(FirstElmt(L), MakeSet(Tail(L)))
 
-# print(MakeSet([1,2,3,4,5,2,2]))
-
 #DEFINISI DAN SPESIKASI KONSTRUKTOR SET
 # KonsoSet: elemen,set -> set
 # konsoSet(e,H) menambahkan sebuah elemen e sebagai elemen pertama set H
@@ -66,9 +60,6 @@ def KonsoSet(e, H) :
         else : 
             return Konso(e, H)
         
-# print(KonsoSet(2, [1,2,3,4]))
-# print(KonsoSet(2, [1,3,4]))
-
 #DEFINISI DAN SPESIFIKASI PREDIKAT
 # IsSet: list -> boolean
 # IsSet(L) mengembalikan true jika L adalah sebuah set
@@ -82,9 +73,6 @@ def IsSet(L) :
         else : 
             return IsSet(Tail(L))
 
-# print(IsSet([1,2,3,4,5]))
-# print(IsSet([1,2,3,4,5,5,5]))
-
 # IsSubset: 2 set -> boolean
 # IsSubset(H1,H2) mengembalikan true jika H1 merupakan subset dari H2
 def IsSubset(H1, H2) : 
@@ -96,9 +84,6 @@ def IsSubset(H1, H2) :
         else : 
             return False
 
-# print(IsSubset([1,3,5], [1,2,3,4,5]))
-# print(IsSubset([1,3,6], [1,2,3,4,5]))
-
 # IsEqualSet: 2 set -> boolean
 # IsEqualSet(H1,H2} benar jika H1 adalah set yang sama dengan H2
 def IsEqualSet(H1, H2) :
@@ -106,9 +91,6 @@ def IsEqualSet(H1, H2) :
         return False
     else :
         return IsSubset(H1, H2) and IsSubset(H2, H1)
-
-# print(IsEqualSet([1,2,3], [1,2,3]))
-# print(IsEqualSet([1,2,3], [1,2,4]))
 
 # IsIntersect: 2 set -> boolean
 # IsIntersect(H1,H2) benar jika H1 beririsan dengan H2
@@ -121,10 +103,6 @@ def IsIntersect(H1, H2) :
         else : 
             return IsIntersect(Tail(H1), H2)
     
-# print(IsIntersect([3], [3,4,5]))
-# print(IsIntersect([1,2,3], [6,4,5]))
-
-
 #DEFINISI DAN SPESIFIKASI OPERASI TERHADAP HIMPUNAN
 # MakeIntersect: 2 set -> set
 # MakeIntersect(H1,H2) menghasilkan set baru yang merupakan hasil irisan antara H1 dan H2
@@ -152,8 +130,6 @@ def MakeUnion(H1, H2) :
         else : 
             return Konso(FirstElmt(H1), MakeUnion(Tail(H1), H2))
 
-# print(MakeUnion([1,2,3], [4,5,6]))
-
 # NBIntersect: 2 set -> integer
 # NBIntersect(H1,H2) menghasilkan jumlah elemen yang beririsan pada H1 dan H2
 # tanpa memanfaatkan fungsi MakeIntersect(H1,H2).
@@ -165,9 +141,6 @@ def NbIntersect(H1, H2) :
             return 1 + NbIntersect(Tail(H1), H2)
         else : 
             return NbIntersect(Tail(H1), H2)
-
-# print(NbIntersect([1,2,3], [3,4,5]))
-# print(NbIntersect([1,2,3], [3,2,5]))
 
 # NBUnion: 2 set -> integer
 # NBUnion(H1,H2) menghasilkan jumlah elemen hasil gabungan antara H1 dan H2
@@ -183,5 +156,23 @@ def NbUnion(H1, H2) :
         else : 
             return 2 + NbUnion(Tail(H1), H2)
         
-# print(NbUnion([1,2,3], [3,2,5]))
-# print(NbUnion([1,2,3], [3,4,5]))
+
+if __name__ == "__main__" : 
+    print(Rember(2, [1,2,3,4,5]))
+    print(MultiRember(2, [1,2,3,4,5,2,2]))
+    print(MakeSet([1,2,3,4,5,2,2]))
+    print(KonsoSet(2, [1,2,3,4]))
+    print(KonsoSet(2, [1,3,4]))
+    print(IsSet([1,2,3,4,5]))
+    print(IsSet([1,2,3,4,5,5,5]))
+    print(IsSubset([1,3,5], [1,2,3,4,5]))
+    print(IsSubset([1,3,6], [1,2,3,4,5]))
+    print(IsEqualSet([1,2,3], [1,2,3]))
+    print(IsEqualSet([1,2,3], [1,2,4]))
+    print(IsIntersect([3], [3,4,5]))
+    print(IsIntersect([1,2,3], [6,4,5]))
+    print(MakeUnion([1,2,3], [4,5,6]))
+    print(NbIntersect([1,2,3], [3,4,5]))
+    print(NbIntersect([1,2,3], [3,2,5]))
+    print(NbUnion([1,2,3], [3,2,5]))
+    print(NbUnion([1,2,3], [3,4,5]))

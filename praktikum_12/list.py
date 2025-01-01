@@ -62,6 +62,18 @@ def IsOneElmt(L) :
         return False
     else : 
         return Tail(L) == [] and Head(L) == []
+    
+# DEFINISI DAN SPESIFIKASI PREDIKAT RELASIONAL
+# IsEqual : 2 List -> boolean 
+# {IsEqual(L1,L2) benar jika semua elemen list L1 sama dengan L2: sama urutan dan sama nilainya}
+def IsEqual(L1, L2):
+    if(IsEmpty(L1) and IsEmpty(L2)):
+        return True
+    else:
+        if(FirstElmt(L1) == FirstElmt(L2)):
+            return IsEqual(Tail(L1), Tail(L2))
+        else:
+            return False
 
 # DEFINISI DAN SPESIFIKASI FUNGSI YANG MENGOPERASIKAN LIST
 # NbElmt : List -> integer
@@ -72,19 +84,6 @@ def NbElmt(L) :
         return 0
     else : 
         return 1 + NbElmt(Tail(L))
-
-# print(Konso(2,[3])) 
-# print(Konsi([3,4,5],6)) 
-# print(FirstElmt([3,4,5,6,7]))
-# print(LastElmt([3,4,5,6,7]))
-# print(Tail([3,4,5,6,7]))
-# print(Head([3,4,5,6,7]))
-# print(IsEmpty([3,4,5,6,7]))
-# print(IsEmpty([])) 
-# print(IsOneElmt([]))
-# print(IsOneElmt([3]))
-# print(IsOneElmt([3,4,5,6,7])) 
-# print(NbElmt([3,4,5,6,7]))
 
 # ElmtKeN : integer >= 0, List -> elemen
 # ElmtKeN (N, L) : Mengirimkan elemen list yang ke N, N <= NbElmt(L) dan N >= 0
@@ -201,3 +200,16 @@ def IsPalindrom(L) :
         if FirstElmt(L) == FirstElmt(Inverse(L)) : 
             return IsPalindrom(Head(Tail(L)))
 
+if __name__ == "__main__" : 
+    print(Konso(2,[3])) 
+    print(Konsi([3,4,5],6)) 
+    print(FirstElmt([3,4,5,6,7]))
+    print(LastElmt([3,4,5,6,7]))
+    print(Tail([3,4,5,6,7]))
+    print(Head([3,4,5,6,7]))
+    print(IsEmpty([3,4,5,6,7]))
+    print(IsEmpty([])) 
+    print(IsOneElmt([]))
+    print(IsOneElmt([3]))
+    print(IsOneElmt([3,4,5,6,7])) 
+    print(NbElmt([3,4,5,6,7]))

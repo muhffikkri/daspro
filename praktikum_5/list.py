@@ -85,19 +85,6 @@ def NbElmt(L) :
     else : 
         return 1 + NbElmt(Tail(L))
 
-# print(Konso(2,[3])) 
-# print(Konsi([3,4,5],6)) 
-# print(FirstElmt([3,4,5,6,7]))
-# print(LastElmt([3,4,5,6,7]))
-# print(Tail([3,4,5,6,7]))
-# print(Head([3,4,5,6,7]))
-# print(IsEmpty([3,4,5,6,7]))
-# print(IsEmpty([])) 
-# print(IsOneElmt([]))
-# print(IsOneElmt([3]))
-# print(IsOneElmt([3,4,5,6,7])) 
-# print(NbElmt([3,4,5,6,7]))
-
 # ElmtKeN : integer >= 0, List -> elemen
 # ElmtKeN (N, L) : Mengirimkan elemen list yang ke N, N <= NbElmt(L) dan N >= 0
 def ElmtkeN(n, L) : 
@@ -213,3 +200,16 @@ def IsPalindrom(L) :
         if FirstElmt(L) == FirstElmt(Inverse(L)) : 
             return IsPalindrom(Head(Tail(L)))
 
+if __name__ == "__main__" : 
+    print(Konso(2,[3])) 
+    print(Konsi([3,4,5],6)) 
+    print(FirstElmt([3,4,5,6,7]))
+    print(LastElmt([3,4,5,6,7]))
+    print(Tail([3,4,5,6,7]))
+    print(Head([3,4,5,6,7]))
+    print(IsEmpty([3,4,5,6,7]))
+    print(IsEmpty([])) 
+    print(IsOneElmt([]))
+    print(IsOneElmt([3]))
+    print(IsOneElmt([3,4,5,6,7])) 
+    print(NbElmt([3,4,5,6,7]))

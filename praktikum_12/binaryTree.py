@@ -132,26 +132,6 @@ def NbDaun1(T) :
     elif (IsEmpty(Left(T))) and (not IsEmpty(Right(T))) :
         return NbDaun(Right(T))
 
-
-
-# T = MakePB('A', 
-#             MakePB('B', 
-#                 MakePB('C', [], []), 
-#                 MakePB('D', 
-#                        MakePB('E', [], []), 
-#                        MakePB('F', [], [])
-#                        )
-#                 ),  
-#             MakePB('G', 
-#                    MakePB('H', [], []), 
-#                    []) 
-#             )
-# PrintBinaryTree(T)
-# print(T)
-# print("Jumlah daun di dalam Tree pake NB1: ", NbDaun1(T))
-# print("Jumlah node di dalam Tree: ", NbElmtTree(T))
-# print("Jumlah daun di dalam Tree: ", NbDaun(T))
-
 # BSearchX : BinSearchTree, elemen → boolean
 # { BsearchX(P,X) Mengirimkan true jika ada node dari Pohon Binary Search Tree P yang
 # bernilai X, mengirimkan false jika tidak ada} 
@@ -261,6 +241,11 @@ def AddDaun(T, X, Y, Kiri) :
 def MakeListDaun(T) : 
     return MakeListDaunHelper(MakeListDaunTree(T))
 
+# MakeListDaunTree : PohonBiner →list Of Node
+# {MakeListDaunTree(P) : }
+# {Jika P adalah pohon kosong, maka menghasilkan list kosong.
+# {Jika P bukan pohon kosong: menghasilkan list yang elemennya adalah semua daun
+# pohon P}
 def MakeListDaunTree(T):
     if IsOneElmt(T):
         return [Akar(T)]
@@ -277,46 +262,79 @@ def MakeListDaunTree(T):
                 else : 
                     return KonsLo(MakeListDaunTree(Right(T)), [])
 
-def MakeListDaunHelper(T) : 
-    if IsEmpty(T) : 
+# Assuming the following helper functions are defined elsewhere in the file:
+# IsList(T), FirstElmt(T), Tail(T), IsAtom(T), KonsLo(e, T), IsEmpty(T), Akar(T), Left(T), Right(T), MakePB(e, L, R), PrintBinaryTree(T), NbDaun1(T), NbElmtTree(T), NbDaun(T)
+def MakeListDaunHelper(T):
+    """
+    Create a list of leaves from a binary tree.
+
+    :param T: The binary tree.
+    :type T: list
+    :return: A list of leaves from the binary tree.
+    :rtype: list
+
+    :example:
+    >>> MakeListDaunHelper(['A', ['B', ['C', [], []], ['D', ['E', [], []], ['F', [], []]]], ['G', ['H', [], []], []]])
+    ['C', 'E', 'F', 'H']
+
+    :raises TypeError: If T is not a list.
+    """
+    if IsEmpty(T):
         return []
-    else : 
-        if IsList(FirstElmt(T)) : 
-            return MakeListDaunHelper(FirstElmt(T)) + MakeListDaunHelper(Tail(T))
-        else :
-            if IsAtom(FirstElmt(T)) : 
-                return KonsLo(FirstElmt(T), MakeListDaunHelper(Tail(T)))
-            else :
-                return MakeListDaunHelper(Tail(T))
+    if IsList(FirstElmt(T)):
+        return MakeListDaunHelper(FirstElmt(T)) + MakeListDaunHelper(Tail(T))
+    else:
+        if IsAtom(FirstElmt(T)):
+            return KonsLo(FirstElmt(T), MakeListDaunHelper(Tail(T)))
+        else:
+            return MakeListDaunHelper(Tail(T))
 
-T = MakePB(10, 
-            MakePB(7, 
-                MakePB(2, [], []), 
-                MakePB(9, [], [])
-                ),  
-            MakePB(14, 
-                   MakePB(12, [], []), 
-                   MakePB(16, [], [])
-                   ) 
-            )
+def SearchMaxOdd(T, f):
+    """
+    Search for the maximum odd value in a binary tree.
 
-IsEven = lambda n : n % 2 == 0
+    :param T: The binary tree.
+    :type T: list
+    :param f: A function to check if a value is odd.
+    :type f: function
+    :return: The maximum odd value in the binary tree.
+    :rtype: int
 
-def SearchMaxOdd(T) : 
-    if IsEmpty(T) : 
+    :example:
+    >>> SearchMaxOdd(['A', ['B', ['C', [], []], ['D', ['E', [], []], ['F', [], []]]], ['G', ['H', [], []], []]], lambda x: x % 2 != 0)
+    0
+
+    :raises TypeError: If T is not a list or f is not a function.
+    """
+    if IsEmpty(T):
         return 0
-    else : 
-        if IsEven(Akar(T)) :
-            return max2(0, max2(SearchMaxOdd(Left(T)), SearchMaxOdd(Right(T))))
-        else : 
-            return max2(Akar(T), max2(SearchMaxOdd(Left(T)), SearchMaxOdd(Right(T))))
+    else:
+        if f(Akar(T)):
+            return max2(0, max2(SearchMaxOdd(Left(T), f), SearchMaxOdd(Right(T), f)))
+        else:
+            return max2(Akar(T), max2(SearchMaxOdd(Left(T), f), SearchMaxOdd(Right(T), f)))
 
-# print(SearchMaxOdd(T))
+if __name__ == "__main__":
+    T = MakePB('A', 
+            MakePB('B', 
+                MakePB('C', [], []), 
+                MakePB('D', 
+                       MakePB('E', [], []), 
+                       MakePB('F', [], [])
+                       )
+                ),  
+            MakePB('G', 
+                   MakePB('H', [], []), 
+                   []) 
+            )
+    PrintBinaryTree(T)
+    print(T)
+    print("Jumlah daun di dalam Tree pake NB1: ", NbDaun1(T))
+    print("Jumlah node di dalam Tree: ", NbElmtTree(T))
+    print("Jumlah daun di dalam Tree: ", NbDaun(T))
 
-# PrintBinaryTree(T)
-# PrintBinaryTree(DelDaun(T, "E"))
-# print(BSearch(T, "C"))
-# print(LevelOfX(T, "E"))
-# PrintBinaryTree(AddDaun(T, "E", "Z", True))
-# print(MakeListDaun(T))
-# print(MakeListDaunTree(T))
+    # Examples for MakeListDaunHelper function
+    print(MakeListDaunHelper(T))
+
+    # Examples for SearchMaxOdd function
+    print(SearchMaxOdd(T, lambda x: x % 2 != 0))

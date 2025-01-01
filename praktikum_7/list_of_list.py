@@ -255,7 +255,7 @@ def MaxSumElmt(S) :
         else : 
             return max2(SumElmt(FirstList(S)), MaxSumElmt(TailList(S)))
 # Contoh aplikasi:
-print(MaxSumElmt([[1,2], 9, [4,5,6], 8]))
-print(MaxSumElmt([[1,2], 90, [4,5,6], 8]))
-print(MaxSumElmt([8,9,10]))
-print(MaxSumElmt([[8,9,10]]))
+# print(MaxSumElmt([[1,2], 9, [4,5,6], 8]))
+# print(MaxSumElmt([[1,2], 90, [4,5,6], 8]))
+# print(MaxSumElmt([8,9,10]))
+# print(MaxSumElmt([[8,9,10]]))

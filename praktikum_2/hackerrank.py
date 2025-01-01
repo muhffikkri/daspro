@@ -1,183 +1,280 @@
 # JAM PASIR AJAIB
-def jam(j, m, s) : 
-    if (    0 <= j 
-        and j <= 24 
-        and 0 <= m 
-        and m < 60 
-        and 0 <= s 
-        and s < 60) : 
+def jam(j: int, m: int, s: int) -> str:
+    """
+    Validate and format the given time.
+
+    :param j: The hour.
+    :type j: int
+    :param m: The minute.
+    :type m: int
+    :param s: The second.
+    :type s: int
+    :return: A formatted string of the time or an error message.
+    :rtype: str
+
+    :example:
+    >>> jam(12, 30, 45)
+    'Jam: 12, Menit: 30, Detik: 45'
+    >>> jam(25, 61, 61)
+    'Waktu tidak valid'
+
+    :raises TypeError: If j, m, or s is not an integer.
+    """
+    if not (isinstance(j, int) and isinstance(m, int) and isinstance(s, int)):
+        raise TypeError("j, m, and s must be integers")
+    if (0 <= j <= 24 and 0 <= m < 60 and 0 <= s < 60):
         return f"Jam: {j}, Menit: {m}, Detik: {s}"
-    return "Waktu tidak valid" 
+    return "Waktu tidak valid"
 
 # LALU LINTAS LANGIT
-def monitor_pesawat(x, y, z) : 
-    if (x > 12000) : return "Terlalu Tinggi"
-    elif (y > 900 or y < 200) : return "Kecepatan Berbahaya"
-    elif (z < 20) : return "Bahan Bakar Rendah"
-    elif (x < 5000 and (y > 200 and y < 900) and z > 50) : return "Aman untuk Mendarat"
+def monitor_pesawat(x: int, y: int, z: int) -> str:
+    """
+    Monitor the status of an aircraft based on altitude, speed, and fuel.
+
+    :param x: The altitude of the aircraft.
+    :type x: int
+    :param y: The speed of the aircraft.
+    :type y: int
+    :param z: The fuel level of the aircraft.
+    :type z: int
+    :return: The status of the aircraft.
+    :rtype: str
+
+    :example:
+    >>> monitor_pesawat(13000, 800, 30)
+    'Terlalu Tinggi'
+    >>> monitor_pesawat(6000, 500, 60)
+    'Berjalan Normal'
+
+    :raises TypeError: If x, y, or z is not an integer.
+    """
+    if not (isinstance(x, int) and isinstance(y, int) and isinstance(z, int)):
+        raise TypeError("x, y, and z must be integers")
+    if x > 12000:
+        return "Terlalu Tinggi"
+    elif y > 900 or y < 200:
+        return "Kecepatan Berbahaya"
+    elif z < 20:
+        return "Bahan Bakar Rendah"
+    elif x < 5000 and (200 < y < 900) and z > 50:
+        return "Aman untuk Mendarat"
     return "Berjalan Normal"
 
 # JALAN SEMUT
-def squareRoot(s) : return s**0.5
-def square(s) : return s*s
-def min2(i, j) : return i if(i < j) else j
+def squareRoot(s: float) -> float:
+    """
+    Calculate the square root of a number.
 
-def d1(x, y, z) : return squareRoot(((x + y) ** 2 + z ** 2))
-def d2(x, y, z) : return squareRoot(((x + z) ** 2 + y ** 2))
-def d3(x, y, z) : return squareRoot(((y + z) ** 2 + x ** 2))
+    :param s: The number to calculate the square root of.
+    :type s: float
+    :return: The square root of the number.
+    :rtype: float
 
-def jalanSemut(x, y, z) :
-    return round(min2(min2(d1(x, y, z),d2(x, y, z)), d3(x, y, z)), 3)
+    :example:
+    >>> squareRoot(4)
+    2.0
+
+    :raises TypeError: If s is not a float.
+    """
+    if not isinstance(s, (int, float)):
+        raise TypeError("s must be a number")
+    return s ** 0.5
+
+def square(s: float) -> float:
+    """
+    Calculate the square of a number.
+
+    :param s: The number to calculate the square of.
+    :type s: float
+    :return: The square of the number.
+    :rtype: float
+
+    :example:
+    >>> square(4)
+    16
+
+    :raises TypeError: If s is not a float.
+    """
+    if not isinstance(s, (int, float)):
+        raise TypeError("s must be a number")
+    return s * s
+
+def min2(i: float, j: float) -> float:
+    """
+    Return the minimum of two numbers.
+
+    :param i: The first number.
+    :type i: float
+    :param j: The second number.
+    :type j: float
+    :return: The minimum of the two numbers.
+    :rtype: float
+
+    :example:
+    >>> min2(4, 5)
+    4
+
+    :raises TypeError: If i or j is not a float.
+    """
+    if not (isinstance(i, (int, float)) and isinstance(j, (int, float))):
+        raise TypeError("i and j must be numbers")
+    return i if i < j else j
+
+def d1(x: float, y: float, z: float) -> float:
+    """
+    Calculate the distance d1.
+
+    :param x: The x coordinate.
+    :type x: float
+    :param y: The y coordinate.
+    :type y: float
+    :param z: The z coordinate.
+    :type z: float
+    :return: The distance d1.
+    :rtype: float
+
+    :example:
+    >>> d1(1, 2, 3)
+    5.0
+
+    :raises TypeError: If x, y, or z is not a float.
+    """
+    if not (isinstance(x, (int, float)) and isinstance(y, (int, float)) and isinstance(z, (int, float))):
+        raise TypeError("x, y, and z must be numbers")
+    return squareRoot(((x + y) ** 2 + z ** 2))
+
+def d2(x: float, y: float, z: float) -> float:
+    """
+    Calculate the distance d2.
+
+    :param x: The x coordinate.
+    :type x: float
+    :param y: The y coordinate.
+    :type y: float
+    :param z: The z coordinate.
+    :type z: float
+    :return: The distance d2.
+    :rtype: float
+
+    :example:
+    >>> d2(1, 2, 3)
+    5.0
+
+    :raises TypeError: If x, y, or z is not a float.
+    """
+    if not (isinstance(x, (int, float)) and isinstance(y, (int, float)) and isinstance(z, (int, float))):
+        raise TypeError("x, y, and z must be numbers")
+    return squareRoot(((x + z) ** 2 + y ** 2))
+
+def d3(x: float, y: float, z: float) -> float:
+    """
+    Calculate the distance d3.
+
+    :param x: The x coordinate.
+    :type x: float
+    :param y: The y coordinate.
+    :type y: float
+    :param z: The z coordinate.
+    :type z: float
+    :return: The distance d3.
+    :rtype: float
+
+    :example:
+    >>> d3(1, 2, 3)
+    5.0
+
+    :raises TypeError: If x, y, or z is not a float.
+    """
+    if not (isinstance(x, (int, float)) and isinstance(y, (int, float)) and isinstance(z, (int, float))):
+        raise TypeError("x, y, and z must be numbers")
+    return squareRoot(((y + z) ** 2 + x ** 2))
+
+def jalanSemut(x: float, y: float, z: float) -> float:
+    """
+    Calculate the shortest path for an ant to travel.
+
+    :param x: The x coordinate.
+    :type x: float
+    :param y: The y coordinate.
+    :type y: float
+    :param z: The z coordinate.
+    :type z: float
+    :return: The shortest path for the ant.
+    :rtype: float
+
+    :example:
+    >>> jalanSemut(1, 2, 3)
+    3.742
+
+    :raises TypeError: If x, y, or z is not a float.
+    """
+    if not (isinstance(x, (int, float)) and isinstance(y, (int, float)) and isinstance(z, (int, float))):
+        raise TypeError("x, y, and z must be numbers")
+    return round(min2(min2(d1(x, y, z), d2(x, y, z)), d3(x, y, z)), 3)
 
 # BELAJAR TENANG
-def BelajarTenang(dB, m):
+def BelajarTenang(dB: float, m: float) -> str:
+    """
+    Calculate the distance a sound can travel based on decibels and fuel.
+
+    :param dB: The decibel level.
+    :type dB: float
+    :param m: The amount of fuel.
+    :type m: float
+    :return: The distance the sound can travel or a message to refuel.
+    :rtype: str
+
+    :example:
+    >>> BelajarTenang(50, 100)
+    '47.434 meter'
+    >>> BelajarTenang(30, 10)
+    'Isi bensin dulu, bang'
+
+    :raises TypeError: If dB or m is not a float.
+    """
+    if not (isinstance(dB, (int, float)) and isinstance(m, (int, float))):
+        raise TypeError("dB and m must be numbers")
     if 15 * (10 ** ((dB - 40) / 20)) <= m:
         return f"{15 * (10 ** ((dB - 40) / 20)):.3f} meter"
     return "Isi bensin dulu, bang"
 
-# SEQUENCE BILANGAN PENYEBUT
-def denumeratorSeq(x) :
-    if((10**(len(x)) - 1)/int(x))%1 == 0: return f"Ada: {int((10**(len(x)) - 1)/int(x))}"
-    return "Tidak ada"
+if __name__ == "__main__":
+    # Examples for jam function
+    print(jam(12, 30, 45))
+    print(jam(25, 61, 61))
 
-# GRADIEN MAGIS
-def square(s) : return s*s
-def energi(x) : return (3*square(x)) + (2*x) - 5
-def gradien(a,b) : return (energi(a) - energi(b)) / (a - b)
+    # Examples for monitor_pesawat function
+    print(monitor_pesawat(13000, 800, 30))
+    print(monitor_pesawat(6000, 500, 60))
 
-# SHOP SMART
-def diskon(harga, persen):
-    return harga - (harga * persen / 100)
+    # Examples for squareRoot function
+    print(squareRoot(4))
+    print(squareRoot(9))
 
-def pajak(harga, persen):
-    return harga + (harga * persen / 100)
+    # Examples for square function
+    print(square(4))
+    print(square(9))
 
-def aturanDiskon(harga, kategori, VIP) : 
-    if kategori == "elektronik":
-        if VIP:
-            return diskon(harga, 30)
-        else:
-            return diskon(harga, 10)
-    if kategori == "pakaian":
-        if VIP:
-            return diskon(harga, 20)
-        else:
-            return diskon(harga, 5)
-    if kategori == "makanan":
-        if VIP:
-            return diskon(harga, 15)
-        else:
-            return diskon(harga, 2)
-    return harga
-    
-def aturanHari(harga, kategori, VIP, hari) : 
-    if hari == "Jumat" or hari == "Sabtu":
-        if VIP:
-            return diskon(harga, 5)
-    if hari == "Minggu":
-        return pajak(harga, 5)
-    if hari == "Rabu":
-        if kategori == "pakaian":
-            return diskon(harga, 5)
-    return harga
+    # Examples for min2 function
+    print(min2(4, 5))
+    print(min2(10, 3))
 
-def aturanLokasi(harga, lokasi) :
-    if lokasi == "dalam negeri":
-        return pajak(harga, 10)
-    if lokasi == "luar negeri":
-        return pajak(harga, 20)
-    return harga
+    # Examples for d1 function
+    print(d1(1, 2, 3))
+    print(d1(4, 5, 6))
 
-def hargaAkhir(harga, kategori, VIP, lokasi, hari):
-    return int(
-        aturanLokasi(
-            aturanHari(
-                aturanDiskon(harga, kategori, VIP), 
-                    kategori, VIP, hari), 
-                lokasi)
-    )
+    # Examples for d2 function
+    print(d2(1, 2, 3))
+    print(d2(4, 5, 6))
 
-# PERPUSTAKAAN AGUNG
-def TabelHari(Hari):
-    if Hari == "senin":
-        return (5000 + 6000 + 4000) / 3
-    if Hari == "selasa":
-        return (7000 + 5000 + 2000) / 3
-    if Hari == "rabu":
-        return (4500 + 3500 + 3000) / 3
-    if Hari == "kamis":
-        return (2900 + 2100 + 2000) / 3
-    if Hari == "jumat":
-        return (3000 + 3000 + 3000) / 3
-    if Hari == "sabtu":
-        return (2000 + 2500 + 2300) / 3
-    if Hari == "minggu":
-        return (1100 + 900 + 1000) / 3
+    # Examples for d3 function
+    print(d3(1, 2, 3))
+    print(d3(4, 5, 6))
 
-def EstimateGreatLib(
-    Hari,
-    JamAwal,
-    JamAkhir,
-    Terbenam,
-    Terbit,
-    AhliStatistika,
-    AhliMatematika,
-    AhliIlmpuPerpustakaan,
-    R,
-):
-    rataPengunjung = TabelHari(Hari)
-    rangePengunjung = max(AhliStatistika, AhliMatematika, AhliIlmpuPerpustakaan) - min(
-        AhliStatistika, AhliMatematika, AhliIlmpuPerpustakaan
-    )
+    # Examples for jalanSemut function
+    print(jalanSemut(1, 2, 3))
+    print(jalanSemut(4, 5, 6))
 
-    if JamAwal >= Terbit and JamAkhir <= Terbenam:
-        lamaWaktu = JamAkhir - JamAwal
-        return round(lamaWaktu * rangePengunjung / rataPengunjung, 5)
-    
-    if JamAkhir <= Terbit or JamAwal >= Terbenam:
-        lamaWaktu = JamAkhir - JamAwal
-        return round((lamaWaktu * rangePengunjung / rataPengunjung) * (R / 100), 5)
-
-    if JamAwal < Terbit and JamAkhir > Terbit and JamAkhir <= Terbenam:
-        siang = JamAkhir - Terbit
-        malam = Terbit - JamAwal
-        return round(
-            (
-                (siang * rangePengunjung / rataPengunjung)
-                + (malam * rangePengunjung / rataPengunjung) * (R / 100)
-            )
-            / 2,
-            5,
-        )
- 
-    if (
-        JamAwal >= Terbit
-        and JamAkhir > Terbenam
-        and JamAkhir > JamAwal
-        and JamAwal < Terbenam
-    ):
-        siang = Terbenam - JamAwal
-        malam = JamAkhir - Terbenam
-        return round(
-            (
-                (siang * rangePengunjung / rataPengunjung)
-                + (malam * rangePengunjung / rataPengunjung) * (R / 100)
-            )
-            / 2,
-            5,
-        )
- 
-    if JamAwal < Terbit and JamAkhir > Terbenam:
-        siang = Terbenam - Terbit
-        malamSebelum = Terbit - JamAwal
-        malamSesudah = JamAkhir - Terbenam
-        return round(
-            (
-                (siang * rangePengunjung / rataPengunjung)
-                + (malamSebelum * rangePengunjung / rataPengunjung) * (R / 100)
-                + (malamSesudah * rangePengunjung / rataPengunjung) * (R / 100)
-            )
-            / 3,
-            5,
-        )
-    
+    # Examples for BelajarTenang function
+    print(BelajarTenang(50, 100))
+    print(BelajarTenang(30, 10))

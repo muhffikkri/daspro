@@ -20,3 +20,12 @@ def add(x: int, y: int) -> int:
     if not isinstance(x, int) or not isinstance(y, int):
         raise TypeError("Both x and y must be integers")
     return x + y
+
+if __name__ == "__main__" : 
+    print(add(2, 3))
+    print(add(2.5, 3))
+    print(add(2, 3.5))
+    print(add(2.5, 3.5))
+    print(add(2, 3.5))
+    print(add(2.5, 3))
+    print(add(2.5, 3.5))
