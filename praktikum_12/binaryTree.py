@@ -337,4 +337,4 @@ if __name__ == "__main__":
     print(MakeListDaunHelper(T))
 
     # Examples for SearchMaxOdd function
-    print(SearchMaxOdd(T, lambda x: x % 2 != 0))
+    print(LevelOfX(T, 'C'))
